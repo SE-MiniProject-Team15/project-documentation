@@ -1,0 +1,40 @@
+@startuml
+title CEMS Sequence Diagram - Event Registration
+
+actor Student
+participant "React Frontend" as FE
+participant "Express API" as API
+participant "Auth/RBAC Middleware" as AUTH
+participant "Registration Service" as REG
+database MongoDB as DB
+participant "Notification Service" as NOTIFY
+
+Student -> FE : Open approved event
+FE -> API : POST /api/events/{id}/register
+API -> AUTH : Verify JWT and role
+AUTH --> API : Student authorized
+API -> REG : Register student
+REG -> DB : Check event status/deadline/capacity
+DB --> REG : Event data
+REG -> DB : Check duplicate registration
+DB --> REG : Registration status
+
+alt Capacity available and no duplicate
+    REG -> DB : Create registration
+    REG -> DB : Store unique registration/QR data
+    REG -> NOTIFY : Create confirmation notification
+    NOTIFY --> Student : Confirmation/in-app notification
+    REG --> API : Registration successful
+else Event full
+    REG -> DB : Create waitlist entry
+    REG --> API : Waitlist status
+else Duplicate registration
+    REG --> API : Reject duplicate
+else Deadline/event invalid
+    REG --> API : Reject registration
+end
+
+API --> FE : JSON response
+FE --> Student : Display result
+
+@enduml

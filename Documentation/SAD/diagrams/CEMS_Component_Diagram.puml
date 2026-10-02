@@ -1,0 +1,48 @@
+@startuml
+title CEMS Component Diagram
+
+skinparam componentStyle rectangle
+
+actor Student
+actor Organizer
+actor Administrator
+
+component "React Web Frontend" as FE
+component "Node.js + Express\nREST API" as API
+component "Authentication & RBAC" as AUTH
+component "Event Management" as EVENT
+component "Event Approval" as APPROVAL
+component "Event Browsing" as BROWSE
+component "Registration / RSVP" as REG
+component "Attendance / QR" as ATT
+component "Notification Service" as NOTIFY
+component "Feedback & Rating" as FEEDBACK
+database "MongoDB" as DB
+cloud "College Email / SMTP" as SMTP
+
+Student --> FE
+Organizer --> FE
+Administrator --> FE
+
+FE --> API : HTTPS / JSON
+
+API --> AUTH
+API --> EVENT
+API --> APPROVAL
+API --> BROWSE
+API --> REG
+API --> ATT
+API --> FEEDBACK
+API --> NOTIFY
+
+AUTH --> DB
+EVENT --> DB
+APPROVAL --> DB
+BROWSE --> DB
+REG --> DB
+ATT --> DB
+FEEDBACK --> DB
+NOTIFY --> DB
+NOTIFY --> SMTP
+
+@enduml

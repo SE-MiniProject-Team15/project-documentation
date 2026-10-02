@@ -1,0 +1,48 @@
+@startuml
+title CEMS Sequence Diagram - Event Approval
+
+actor Organizer
+actor Administrator
+participant "React Frontend" as FE
+participant "Express API" as API
+participant "Auth/RBAC Middleware" as AUTH
+participant "Event / Approval Service" as SERVICE
+database MongoDB as DB
+participant "Notification Service" as NOTIFY
+
+Organizer -> FE : Create/edit event
+FE -> API : POST /api/events
+API -> AUTH : Verify Organizer
+AUTH --> API : Authorized
+API -> SERVICE : Validate and submit
+SERVICE -> DB : Save event as Pending Approval
+DB --> SERVICE : Saved
+SERVICE --> API : Pending status
+API --> FE : Submission confirmation
+FE --> Organizer : Event submitted
+
+Administrator -> FE : View pending events
+FE -> API : GET /api/admin/events/pending
+API -> AUTH : Verify Administrator
+AUTH --> API : Authorized
+API -> SERVICE : Fetch pending events
+SERVICE -> DB : Query pending events
+DB --> SERVICE : Pending events
+SERVICE --> API : Pending events
+API --> FE : JSON list
+FE --> Administrator : Display queue
+
+Administrator -> FE : Approve / Reject / Request Changes
+FE -> API : Submit decision
+API -> AUTH : Verify Administrator
+AUTH --> API : Authorized
+API -> SERVICE : Process decision
+SERVICE -> DB : Update event status and audit record
+DB --> SERVICE : Updated
+SERVICE -> NOTIFY : Notify Organizer
+NOTIFY --> Organizer : Approval decision
+SERVICE --> API : Decision result
+API --> FE : JSON response
+FE --> Administrator : Display result
+
+@enduml
