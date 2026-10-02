@@ -4,7 +4,7 @@
 
 Team 15 
 
-_Tech Stack: JavaScript (MERN Stack) / Python (Django)_ 
+_Tech Stack: JavaScript (MERN Stack) 
 
 |**SRN**|**Name**|
 |---|---|
