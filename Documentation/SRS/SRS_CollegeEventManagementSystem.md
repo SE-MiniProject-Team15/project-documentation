@@ -88,7 +88,7 @@ This Software Requirements Specification (SRS) document describes the functional
 
 ### 1.2 Scope 
 
-CEMS is a web-based application that allows a college to manage the full lifecycle of campus events — from creation and approval, through student discovery and registration, to attendance tracking and post-event feedback. The system supports three roles: Student, Event Organizer (faculty/club representative), and Administrator. It will be built using the MERN stack (MongoDB, Express, React, Node.js) and/or Python (Django) for the backend, as decided during the design phase. 
+CEMS is a web-based application that allows a college to manage the full lifecycle of campus events — from creation and approval, through student discovery and registration, to attendance tracking and post-event feedback. The system supports three roles: Student, Event Organizer (faculty/club representative), and Administrator. It will be built using the MERN stack (MongoDB, Express, React, Node.js)  for the backend, as decided during the design phase. 
 
 ### 1.3 Definitions, Acronyms and Abbreviations 
 
@@ -158,11 +158,11 @@ CEMS is a new, standalone web application. It is not a modification of an existi
 
 ### 2.4 Operating Environment 
 
-Server-side: Node.js/Express (MERN) or Django (Python), with MongoDB or PostgreSQL as the database. Clientside: a responsive web front end (React) accessible via modern desktop and mobile browsers over HTTPS. 
+Server-side: Node.js/Express (MERN)  with MongoDB  as the database. Clientside: a responsive web front end (React) accessible via modern desktop and mobile browsers over HTTPS. 
 
 ### 2.5 Design and Implementation Constraints 
 
-- Must be delivered using the JavaScript (MERN) stack and/or Python (Django), as assigned to Team 15. 
+- Must be delivered using the JavaScript (MERN) stack  as assigned to Team 15. 
 
 - Must be completed within the academic semester project timeline. 
 
@@ -326,7 +326,7 @@ None beyond a standard device with a camera/scanner (optional) for QR-based chec
 
    - Email/SMTP service (e.g., SendGrid or Nodemailer) for notifications. 
 
-   - Database: MongoDB (MERN) or PostgreSQL (Django). 
+   - Database: MongoDB (MERN) . 
 
 ### 4.4 Communication Interfaces 
 
