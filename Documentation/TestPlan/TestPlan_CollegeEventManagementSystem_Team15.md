@@ -4,7 +4,7 @@
 
 ## Team 15
 
-Tech Stack: JavaScript (MERN Stack) / Python (Django)
+Tech Stack: JavaScript (MERN Stack)
 
 ## 1. Introduction
 
@@ -82,7 +82,7 @@ FR-08: Feedback & Rating System
 | FR03_UT_02 | Event Approval Workflow | Verify Admin can approve a pending event | A pending event exists in the queue | 1: Open the pending event 2: Click 'Approve' | Event: Tech Fest 2026 | Event status changes to 'Approved'; event becomes visible in the public event listing |  |  |
 | FR03_UT_03 | Event Approval Workflow | Verify Admin can reject a pending event with a mandatory reason | A pending event exists in the queue | 1: Open the pending event 2: Click 'Reject' 3: Attempt to submit without entering a reason | Reason: (blank) | System prevents submission and displays 'Rejection reason is required' |  |  |
 | FR03_UT_04 | Event Approval Workflow | Verify Admin can select 'Request Changes' as a third outcome, distinct from Approve/Reject, with comments sent to the Organizer | A pending event exists in the queue | 1: Open the pending event 2: Click 'Request Changes' 3: Enter comments 4: Submit | Event: Tech Fest 2026, Comments: 'Please confirm venue capacity' | Event status changes to 'Changes Requested' (not Approved or Rejected); Organizer receives the comments via notification; event remains editable and re-submittable |  |  |
-| FR03_IT_01 | Event Approval Workflow | Verify Organizer receives a notification on approval decision | Admin has approved or rejected an event | 1: Admin approves/rejects an event 2: Check Organizer's notification panel/email | Event: Tech Fest 2026 | Organizer receives an in-app and/or email notification reflecting the approval/rejection decision and reason |  |  |
+| FR03_IT_01 | Event Approval Workflow | Verify Organizer receives a notification on approval decision | Admin has approved or rejected an event | 1: Admin approves/rejects an event 2: Check Organizer's notification panel/email | Event: Tech Fest 2026 | Organizer receives both an in-app notification and an email reflecting the approval/rejection decision and reason |  |  |
 | FR03_IT_02 | Event Approval Workflow | Verify a rejected event can be edited and re-submitted by the Organizer | An event has been rejected with a reason | 1: Organizer opens the rejected event 2: Edits the flagged details 3: Re-submits | Event: Tech Fest 2026 (rejected: 'venue conflict') | Event status changes back to 'Pending Approval' and reappears in the Admin queue |  |  |
 | FR03_IT_03 | Event Approval Workflow | Verify only Admin role can access the approval queue | A Student or Organizer session is active | 1: While logged in as Student, attempt to access the approval queue URL directly | Student session token | Access is denied (HTTP 403); approval queue is not rendered |  |  |
 | FR03_ST_01 | Event Approval Workflow | Verify end-to-end approval workflow from submission to public visibility | Organizer and Admin accounts exist | 1: Organizer submits event 2: Admin reviews and approves 3: Student views public listing | Event: Cultural Night 2026 | Event transitions Pending → Approved → Publicly Listed with no data loss at any stage |  |  |

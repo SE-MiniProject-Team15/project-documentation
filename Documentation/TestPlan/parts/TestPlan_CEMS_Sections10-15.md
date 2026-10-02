@@ -17,7 +17,7 @@
 
 ## 11. Assumptions & Dependencies
 
-- The application build delivered for testing matches the approved SAD (component boundaries, API contracts) and the current SRS v1.1.
+- The application build delivered for testing matches the approved SAD (component boundaries, API contracts) and the current SRS v1.2.
 - The test and load-test databases, the email sandbox, and the TLS test certificate (Section 6.2) are available and stable for the full execution window.
 - Test data (dummy accounts, the 10-event data set, 300 dummy registrations) is seeded by the script in Section 6.5 before each test cycle.
 - The course does not require testing of SSO/college-ID integration, since the SRS (§2.1) marks it as a future release, out of scope for Part-1.
@@ -103,10 +103,10 @@ The RTM maps each SRS requirement to its test case(s). Every requirement now has
 | NFR-03 | Responsive, accessible, no-training usability | `NFR_USA_01` |
 | NFR-04 | 99% availability, backup/restore | `NFR_REL_01` |
 | NFR-05 | Horizontal scalability | Not directly tested; inferred from `NFR_PERF_01`/`02` under load |
-| NFR-06 | Modular MVC, documented REST APIs | Verified by code/design review, not a runtime test case |
+| NFR-06 | Modular layered architecture, documented REST APIs | Verified by code/design review, not a runtime test case |
 | NFR-07 | Latest two versions of Chrome/Firefox/Edge/Safari | `NFR_PORT_01` |
 
-**Coverage status: complete.** All functional and non-functional/security requirements in SRS v1.1 now trace to at least one test case.
+**Coverage status: complete.** All functional and non-functional/security requirements in SRS v1.2 now trace to at least one test case.
 
 ## 14. Test Metrics & Reporting
 

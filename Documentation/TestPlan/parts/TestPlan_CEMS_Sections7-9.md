@@ -4,7 +4,7 @@ The schedule follows the test levels in order (unit, integration, system, accept
 
 | # | Milestone | Date / Duration | Owner |
 | --- | --- | --- | --- |
-| 1 | Test plan and test case design (67 functional cases + non-functional cases) | Completed by 28-Sep-2026 | QA Lead |
+| 1 | Test plan and test case design (72 functional cases + 17 non-functional cases = 89 total) | Completed by 28-Sep-2026 | QA Lead |
 | 2 | Test environment and test data setup | 05-Oct-2026 | QA Lead / Developer |
 | 3 | Unit and integration test execution | 06-Oct-2026 to 14-Oct-2026 | Test Engineers |
 | 4 | System test execution (functional and non-functional) | 15-Oct-2026 to 22-Oct-2026 | Test Engineers |
@@ -19,7 +19,7 @@ The schedule follows the test levels in order (unit, integration, system, accept
 The testing effort produces the following deliverables for the College Event Management System (CEMS):
 
 - **Test Plan**: this document.
-- **Test Cases**: 67 functional cases (unit, integration and system levels, with IDs such as FR01_UT_01, FR03_ST_03) and non-functional cases covering performance, security, usability, reliability and portability.
+- **Test Cases**: 72 functional cases (unit, integration and system levels, with IDs such as FR01_UT_01, FR03_ST_03) and 17 non-functional cases covering performance, security, usability, reliability and portability.
 - **Test Scripts**: automated API tests (Postman/Jest) and UI tests (Cypress).
 - **Test Data**: dummy Student, Organizer and Admin accounts; sample events in each state (pending, approved, rejected, full); sample registrations, waitlist entries and feedback.
 - **Requirements Traceability Matrix (RTM)**: maps FR-01 to FR-08 and the non-functional requirements to test cases.

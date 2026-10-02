@@ -4,7 +4,7 @@
 
 Team 15 
 
-_Tech Stack: JavaScript (MERN Stack) 
+Tech Stack: JavaScript (MERN Stack) 
 
 |**SRN**|**Name**|
 |---|---|
@@ -19,9 +19,9 @@ _Tech Stack: JavaScript (MERN Stack)
 
 |**Document Title**|Software Requirements Specification – College Event<br>Management System|
 |---|---|
-|**Version**|1.1|
+|**Version**|1.2|
 |**Team**|Team 15|
-|**Date**|01 October 2026|
+|**Date**|02 October 2026|
 
 
 
@@ -31,6 +31,7 @@ _Tech Stack: JavaScript (MERN Stack)
 | --- | --- | --- | --- |
 | 1.0 | 10 September 2026 | Team 15 | Initial draft |
 | 1.1 | 01 October 2026 | Team 15 | Added UML use case diagram; added Security Objectives and Requirements (§3.3); numbered all functional requirements as sub-items for measurability; added NFR IDs; resolved open items raised by the SAD review (lockout duration, password policy, check-in window, material-edit re-approval, waitlist promotion, audit log, department field, feedback visibility) by folding them into the relevant FRs; corrected internal inconsistencies (§1.5 section reference, FR-02 wording, FR-06 "Volunteer" role, Admin user-management claim in §2.3) |
+| 1.2 | 02 October 2026 | Team 15 | Removed Admin from self-registration wording in FR-01; made tech stack MERN-only throughout (removed Django/PostgreSQL references); replaced "MVC" with a single layered-architecture description (NFR-06); fixed appendix table formatting |
 
 
 
@@ -88,7 +89,7 @@ This Software Requirements Specification (SRS) document describes the functional
 
 ### 1.2 Scope 
 
-CEMS is a web-based application that allows a college to manage the full lifecycle of campus events — from creation and approval, through student discovery and registration, to attendance tracking and post-event feedback. The system supports three roles: Student, Event Organizer (faculty/club representative), and Administrator. It will be built using the MERN stack (MongoDB, Express, React, Node.js)  for the backend, as decided during the design phase. 
+CEMS is a web-based application that allows a college to manage the full lifecycle of campus events — from creation and approval, through student discovery and registration, to attendance tracking and post-event feedback. The system supports three roles: Student, Event Organizer (faculty/club representative), and Administrator. It is built using the MERN stack (MongoDB, Express, React, Node.js), as decided during the design phase. 
 
 ### 1.3 Definitions, Acronyms and Abbreviations 
 
@@ -158,11 +159,11 @@ CEMS is a new, standalone web application. It is not a modification of an existi
 
 ### 2.4 Operating Environment 
 
-Server-side: Node.js/Express (MERN)  with MongoDB  as the database. Clientside: a responsive web front end (React) accessible via modern desktop and mobile browsers over HTTPS. 
+Server-side: Node.js/Express with MongoDB as the database. Client-side: a responsive web front end (React) accessible via modern desktop and mobile browsers over HTTPS. 
 
 ### 2.5 Design and Implementation Constraints 
 
-- Must be delivered using the JavaScript (MERN) stack  as assigned to Team 15. 
+- Must be delivered using the JavaScript (MERN) stack as assigned to Team 15. 
 
 - Must be completed within the academic semester project timeline. 
 
@@ -182,7 +183,7 @@ Server-side: Node.js/Express (MERN)  with MongoDB  as the database. Clientside: 
 
 #### FR-01: User Registration and Authentication 
 
-The system shall allow Students, Event Organizers, and Administrators to register and log in using role-based credentials. 
+The system shall allow Students and Event Organizers to self-register, and Students, Event Organizers, and Administrators to log in, using role-based credentials. Administrator accounts are pre-provisioned and cannot be self-registered (see FR-01.3). 
 
 - **FR-01.1** Users register with name, college email ID, password, and role (Student / Organizer). The system shall reject registration if the email is already in use or does not match a valid email format. 
 
@@ -281,7 +282,7 @@ The system shall allow Students who attended an event to submit a rating and fee
 |**NFR-03**|**Usability**|The interface shall be responsive (desktop, tablet,<br>mobile) and usable by a first-time user without training,<br>following standard web accessibility guidelines<br>(WCAG 2.1 AA where feasible).|
 |**NFR-04**|**Reliability / Availability**|The system shall be available 99% of the time during<br>active college semesters, with automated daily database<br>backups and a documented restore procedure.|
 |**NFR-05**|**Scalability**|The system architecture shall support horizontal scaling<br>of the application server to accommodate peak<br>registration periods (e.g., fest season).|
-|**NFR-06**|**Maintainability**|The codebase shall follow a modular MVC structure<br>with documented REST APIs to allow independent<br>maintenance of frontend and backend.|
+|**NFR-06**|**Maintainability**|The codebase shall follow a modular layered architecture<br>(React client; Express routes/controllers; service layer;<br>Mongoose data models) with documented REST APIs to allow independent<br>maintenance of frontend and backend.|
 |**NFR-07**|**Portability**|The web application shall function correctly on the<br>latest two major versions of Chrome, Firefox, Edge,<br>and Safari.|
 
 
@@ -326,7 +327,7 @@ None beyond a standard device with a camera/scanner (optional) for QR-based chec
 
    - Email/SMTP service (e.g., SendGrid or Nodemailer) for notifications. 
 
-   - Database: MongoDB (MERN) . 
+   - Database: MongoDB. 
 
 ### 4.4 Communication Interfaces 
 
@@ -356,15 +357,9 @@ The diagram below shows the three actors (Student, Organizer, Administrator), th
 
 ## 6. Appendix: Team 15 Members 
 
-||**SRN**|**Name**|
-|---|---|---|
-|PES1UG24CS576||Leesha R|
-|PES1UG24CS593||Prajwal Manjunath Hegde|
-
-
-
-||**SRN**||**Name**|
-|---|---|---|---|
-|PES1UG24CS570||G Purvi||
-|PES1UG24CS559||Ashith Rao K||
-
+|**SRN**|**Name**|
+|---|---|
+|PES1UG24CS576|Leesha R|
+|PES1UG24CS593|Prajwal Manjunath Hegde|
+|PES1UG24CS570|G Purvi|
+|PES1UG24CS559|Ashith Rao K|

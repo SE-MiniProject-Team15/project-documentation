@@ -12,7 +12,7 @@
 
 **Scope:** Testing covers the full event lifecycle supported by CEMS — user registration/authentication, event creation and approval workflow, event browsing/search, event registration (RSVP), QR-based attendance tracking, notifications, and post-event feedback. Third-party email/SMTP delivery internals and any future SSO/college-ID integration are excluded, as these are out of scope for v1 per the SRS.
 
-**References:** SRS_CollegeEventManagementSystem.md (Team 15, v1.0), IEEE Std 830-1998, Team 15 Project Charter / Problem Statement.
+**References:** SRS_CollegeEventManagementSystem.md (Team 15, v1.1), IEEE Std 830-1998, Team 15 Project Charter / Problem Statement.
 
 **Definitions:** CEMS (College Event Management System), SRS (Software Requirements Specification), FR (Functional Requirement), NFR (Non-Functional Requirement), JWT (JSON Web Token), RSVP (event registration response), QR Code (Quick Response Code used for attendance check-in), RTM (Requirements Traceability Matrix).
 
@@ -50,4 +50,4 @@ Features mapped to SRS functional requirement IDs:
 - Future SSO / college-ID integration — explicitly out of scope for v1 per SRS §2.1 and §2.6
 - Payment gateway integration for paid events — explicitly out of scope for v1 per SRS §2.6
 - Physical QR scanner hardware — only the manual code entry fallback and scan-result handling within CEMS are tested
-- Underlying database engine reliability (MongoDB/PostgreSQL internals) — assumed stable per platform vendor
+- Underlying database engine reliability (MongoDB internals) — assumed stable per platform vendor
