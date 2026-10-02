@@ -3,7 +3,7 @@
 **Project:** College Event Management System (CEMS)
 **Version:** 1.0
 **Authors:** Team 15
-**Date:** 16-09-2025
+**Date:** 01-10-2026
 **Status:** Draft
 
 ## 1. Introduction
