@@ -4,6 +4,8 @@ This folder contains the Team 15 SAD deliverable for the College Event Managemen
 
 Files:
 - SAD_CollegeEventManagementSystem_Team15.md
+- CEMS_Implementation_Architecture.md
+- ../API/REST_API_Reference.md
 - diagrams/CEMS_Component_Diagram.png
 - diagrams/CEMS_Sequence_Event_Registration.png
 - diagrams/CEMS_Sequence_Event_Approval.png

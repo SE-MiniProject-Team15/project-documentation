@@ -2,8 +2,8 @@
 ## College Event Management System (CEMS)
 ### Team 15
 
-**Version:** 1.0  
-**Date:** 2 October 2026  
+**Version:** 1.1
+**Date:** 2 November 2026
 **Technology Stack:** MERN (MongoDB, Express.js, React.js, Node.js)
 
 ---
@@ -13,9 +13,9 @@
 | Item | Details |
 |---|---|
 | Document Title | Software Architecture and Design Specification – College Event Management System |
-| Version | 1.0 |
+| Version | 1.1 |
 | Team | Team 15 |
-| Date | 2 October 2026 |
+| Date | 2 November 2026 |
 | Architecture Style | Layered Architecture with RESTful Client-Server Interface |
 | Technology Stack | MERN |
 
@@ -39,6 +39,7 @@
    3.6 Risks and Mitigations  
    3.7 Traceability to Requirements  
    3.8 Security Architecture  
+   3.9 Implementation Architecture
 4. Design  
    4.1 Design Overview  
    4.2 Sequence Diagram – Event Registration  
@@ -500,6 +501,14 @@ MongoDB
 
 ---
 
+## 3.9 Implementation Architecture
+
+The implementation separates the React presentation layer, Express routing and middleware, controller logic, Mongoose persistence, and external notification services. See [CEMS Implementation Architecture](CEMS_Implementation_Architecture.md) for the current module-to-file map and testing boundaries. The implemented request and response formats are documented in the [REST API Reference](../API/REST_API_Reference.md).
+
+The implementation is the source of truth for available endpoints. Planned capabilities that are not present in the repository are not listed as implemented API routes.
+
+---
+
 # 4. Design
 
 ## 4.1 Design Overview
@@ -646,83 +655,11 @@ Organizer
 
 # 4.4 API Design
 
-The following API design is proposed to implement the requirements. Endpoint names should be kept consistent with the final implementation.
+The running API is implemented under `/api`. Authentication, role access, request fields, response shapes, and error statuses are maintained in the [CEMS REST API Reference](../API/REST_API_Reference.md). This reference documents implemented routes rather than proposed routes.
 
-## Authentication APIs
+The current API uses `POST /events/:eventId/registrations` for a student registration and `POST /events/:eventId/attendance/check-in` for organizer check-in. Check-in accepts a code for the selected event only, during the event schedule, and records the check-in time and organizer. QR scanning and manual code entry use the same endpoint.
 
-| Method | Endpoint | Purpose | Access |
-|---|---|---|---|
-| POST | `/api/auth/register` | Register Student/Organizer | Public |
-| POST | `/api/auth/login` | Authenticate user | Public |
-| POST | `/api/auth/logout` | End authenticated session | Authenticated |
-| POST | `/api/auth/forgot-password` | Initiate password reset | Public |
-
-### Registration Request
-
-```json
-{
-  "name": "Student Name",
-  "email": "student@college.edu",
-  "password": "password",
-  "role": "Student"
-}
-```
-
-## Event APIs
-
-| Method | Endpoint | Purpose | Access |
-|---|---|---|---|
-| GET | `/api/events` | Browse/search/filter approved events | Public/Student |
-| GET | `/api/events/:id` | View event details | Public/Student |
-| POST | `/api/events` | Create event | Organizer |
-| PUT | `/api/events/:id` | Edit event | Owner Organizer |
-| DELETE | `/api/events/:id` | Cancel/delete event | Owner Organizer |
-
-## Approval APIs
-
-| Method | Endpoint | Purpose | Access |
-|---|---|---|---|
-| GET | `/api/admin/events/pending` | View pending events | Administrator |
-| POST | `/api/admin/events/:id/approve` | Approve event | Administrator |
-| POST | `/api/admin/events/:id/reject` | Reject event | Administrator |
-| POST | `/api/admin/events/:id/request-changes` | Request changes | Administrator |
-
-## Registration APIs
-
-| Method | Endpoint | Purpose | Access |
-|---|---|---|---|
-| POST | `/api/events/:id/register` | Register student | Student |
-| DELETE | `/api/events/:id/register` | Cancel registration | Student |
-| GET | `/api/registrations/me` | View own registrations | Student |
-
-## Attendance APIs
-
-| Method | Endpoint | Purpose | Access |
-|---|---|---|---|
-| POST | `/api/events/:id/check-in` | Check in using QR/code | Organizer |
-
-## Feedback APIs
-
-| Method | Endpoint | Purpose | Access |
-|---|---|---|---|
-| POST | `/api/events/:id/feedback` | Submit feedback | Eligible Student |
-| GET | `/api/events/:id/feedback` | View permitted feedback/ratings | Authorized |
-
-### API Response Convention
-
-Successful responses should return JSON with the relevant resource or operation status.
-
-Example:
-
-```json
-{
-  "status": "success",
-  "message": "Registration successful",
-  "data": {
-    "registrationId": "REG-12345"
-  }
-}
-```
+Successful responses use JSON with `status: "success"` and resource data under `data`. Client or business-rule errors use `status: "fail"` and a human-readable `message`; unexpected server failures return a generic `500` response.
 
 ---
 
