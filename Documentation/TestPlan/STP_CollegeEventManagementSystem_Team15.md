@@ -295,12 +295,14 @@ The testing effort produces the following deliverables for the College Event Man
 
 - **Test Plan**: this document.
 - **Test Cases**: 78 functional cases (unit, integration and system levels, with IDs such as FR01_UT_01, FR03_ST_03) and 17 non-functional cases covering performance, security, usability, reliability and portability.
-- **Test Scripts**: automated API tests (Postman/Jest) and UI tests (Cypress).
+- **Test Scripts**: the application repository provides Node.js backend tests, a system integration runner, and Playwright browser and accessibility tests.
 - **Test Data**: dummy Student, Organizer and Admin accounts; sample events in each state (pending, approved, rejected, full); sample registrations, waitlist entries and feedback.
 - **Requirements Traceability Matrix (RTM)**: maps FR-01 to FR-08 and the non-functional requirements to test cases.
 - **Test Execution Logs**: pass/fail record for each test case in each run.
 - **Defect Reports**: logged in GitHub Issues with severity, priority and status.
 - **Test Summary Report**: pass rate, open defects, requirement coverage and sign-off recommendation.
+
+The [final UI verification results](TestPlan_CollegeEventManagementSystem_Team15.md#5-final-ui-verification) record the tested application commit, local environment, and case outcomes.
 
 ## 9. Roles and Responsibilities
 

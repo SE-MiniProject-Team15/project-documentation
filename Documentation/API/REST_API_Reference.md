@@ -26,6 +26,8 @@ Registration request:
 
 `role` may be omitted; the server defaults it to `Student`.
 
+On successful registration, the UI uses the issued cookie to open the Student or Organizer dashboard. Five failed sign-ins for a known account set a 15-minute account lock. Wrong credentials and locked-account attempts return the same generic HTTP 401 message. Login also has a separate per-IP request limit.
+
 ## Events
 
 | Method | Path | Access | Purpose |
@@ -37,7 +39,12 @@ Registration request:
 | GET | `/events/mine` | Organizer | List events owned by the organizer. |
 | PATCH | `/events/:id` | Owning Organizer | Edit an event. Material changes to approved events return them to approval. |
 | PATCH | `/events/:id/cancel` | Owning Organizer | Cancel an event. |
-| PATCH | `/events/:id/approve` | Admin | Approve a pending event. |
+| GET | `/events/admin/pending` | Admin | List submissions awaiting a decision. |
+| GET | `/events/admin/pending/:id` | Admin | Read a pending submission's review details. |
+| PATCH | `/events/admin/:id/decision` | Admin | Approve, reject, or request changes on a pending submission. Returns the event, the audit record and whether the organizer notification was saved. |
+| PATCH | `/events/:id/approve` | Admin | Approve a pending event through the same decision workflow. |
+
+Send `{"action":"approve"}`, `{"action":"reject","reason":"Venue paperwork is required"}`, or `{"action":"request_changes","comments":"Please confirm venue capacity"}` to the decision endpoint. Reasons and comments must contain 10 to 1,000 characters after trimming. Pending events are locked for organizer editing. Organizers can resubmit rejected events and events with changes requested. Material edits to an approved event leave the last approved snapshot visible during review.
 
 `GET /events` accepts optional query parameters: `q`, `category`, `venue`, `department`, `dateFrom`, `dateTo`, `page`, `limit`, and `sort` (`date` or `popular`). It returns `data.events` and `data.pagination` (`page`, `limit`, `total`, `totalPages`).
 
@@ -65,35 +72,24 @@ Example submission:
 
 | Method | Path | Access | Purpose |
 |---|---|---|---|
-| POST | `/events/:eventId/registrations` | Student | Register for an approved event and receive a check-in code. Repeating this before check-in rotates the code and invalidates the old one. |
+| POST | `/events/:eventId/register` | Student | Register for an approved event before the deadline, or join the waitlist when it is full. Duplicate active registrations return HTTP 409. |
+| DELETE | `/events/:eventId/register` | Student | Cancel an active registration. The next waitlisted student is promoted when an eligible seat opens. |
+| GET | `/registrations/me` | Student | List the current student's active registrations, waitlist entries, and tickets. |
 | POST | `/events/:eventId/attendance/check-in` | Organizer | Record a student's attendance using a scanned or manually entered code. The organizer must own the event. |
 | GET | `/events/:eventId/attendance` | Owning Organizer or Admin | Return event attendance totals and registered students with check-in times. |
 | GET | `/events/attendance/overview` | Admin | List events with registrations and attendance totals. |
 
-Registration needs no request body. Example response:
-
-```json
-{
-  "status": "success",
-  "data": {
-    "eventId": "507f1f77bcf86cd799439011",
-    "code": "CEMS-0123456789ABCDEF0123456789ABCDEF",
-    "registeredAt": "2026-11-02T10:00:00.000Z"
-  }
-}
-```
-
-The code is returned to the registered student so the client can display it and render a QR. Only its SHA-256 digest is stored. A new registration is accepted only while the event is approved, before its registration deadline, and while capacity remains. An existing student can rotate and recover an unused code after the deadline; the old code becomes invalid.
+Registration needs no request body and returns HTTP 201 with `data.registration` and `data.notificationSaved`. The registration includes `id`, `eventId`, `status`, and `createdAt`. A `Registered` response also includes `registrationCode` and `qrPayload`; a `Waitlisted` response has no ticket until promotion. The client renders the ticket QR from `qrPayload`. Registration confirmation email contains confirmation text.
 
 Check-in request:
 
 ```json
 {
-  "code": "CEMS-0123456789ABCDEF0123456789ABCDEF"
+  "code": "<qrPayload from the ticket>"
 }
 ```
 
-The code must belong to a registration for the selected event. Check-in is accepted from event start through event end, inclusive. A code cannot be used twice. Successful attendance records `attendedAt` and `checkedInBy` on the registration.
+Both scanner and manual entry submit the full `qrPayload` for the selected event. Check-in is accepted from event start through event end, inclusive. A code cannot be used twice. Successful attendance records `attendedAt` and `checkedInBy` on the registration.
 
 Successful check-in response:
 
